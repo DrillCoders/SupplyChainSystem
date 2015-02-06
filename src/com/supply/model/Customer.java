@@ -34,7 +34,7 @@ public class Customer implements Serializable{
 @Column(name="CustId")
 /*@XmlAttribute*/
 private long CustId;
-
+//comment
 @Column(name="CompName")
 private String compName;
 
