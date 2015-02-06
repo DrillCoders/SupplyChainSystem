@@ -1,20 +1,7 @@
 package com.supply.dao;
 
 
-
-
-
-
-
-
-
-
-
-
-//bitrate is low
-
-
-
+// i Love God
 
 
 
