@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
-
+// customers are here
 import com.supply.model.Customer;
 import com.supply.utilities.Utility;
 
