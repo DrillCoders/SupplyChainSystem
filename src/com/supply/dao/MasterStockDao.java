@@ -1,11 +1,6 @@
 package com.supply.dao;
 
-
-// testing if i got de instruction ryt
-
-
-
-
+// check
 
 
 import java.util.List;
