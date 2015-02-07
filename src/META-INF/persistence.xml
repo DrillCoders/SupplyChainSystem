@@ -8,7 +8,10 @@
     <class>com.supply.model.MasterStock</class>
     <class>com.supply.model.StoreStock</class>
      <class>com.supply.model.Suppliers</class>
-        
+     <class>com.supply.model.Customer</class>
+     <class>com.supply.model.OrderItem</class>
+     <class>com.supply.model.PurchaseOrder</class> 
+     <class>com.supply.model.ReturnedGoods</class>   
     <properties>
         <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/vd_db"/>
         <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>

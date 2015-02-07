@@ -51,6 +51,8 @@ public class Test {
 		supplier3.setMasterStock(ms);
 		supplier4.setStoreStock(ss);
 		ss.setMasterStock(ms);*/
+		
+		
 		em.getTransaction().begin();
 		em.persist(ms);
 		em.persist(ss);

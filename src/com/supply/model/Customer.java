@@ -68,23 +68,13 @@ public void setOrderline(Set<OrderItem> orderline) {
 	this.orderline = orderline;
 }
 
-/*@OneToMany(targetEntity=OrderItem.class,mappedBy="cust",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-private List<OrderItem>orders;
 
-public List<OrderItem> getOrders() {
-	return orders;
-}
-
-public void setOrders(List<OrderItem> orders) {
-	this.orders = orders;
-}*/
 
 @OneToMany(targetEntity=Delivery.class,mappedBy="customer",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 private List<Delivery>delivery;
 
 
 @OneToMany(targetEntity=Invoice.class,mappedBy="customers",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-
 private List<Invoice> invoice;
 
 

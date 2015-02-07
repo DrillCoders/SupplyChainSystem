@@ -3,10 +3,13 @@ package com.supply.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -35,8 +38,16 @@ public class StoreStock {
 	
 	@ManyToMany(mappedBy="storeStock")
 	private Set<Suppliers>supplier = new HashSet<Suppliers>();
-	
-	
+	@OneToMany(targetEntity=ReturnedGoods.class,mappedBy="storeStock",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	private ReturnedGoods returnedG;
+
+	public ReturnedGoods getReturnedG() {
+		return returnedG;
+	}
+	public void setReturnedG(ReturnedGoods returnedG) {
+		this.returnedG = returnedG;
+	}
+
 
 	public Set<Suppliers> getSupplier() {
 		return supplier;

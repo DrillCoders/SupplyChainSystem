@@ -5,12 +5,17 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -35,28 +40,112 @@ public class PurchaseOrder implements Serializable {
 	private Date purchaseDate;
 
 	@Column(name = "status")
-	private String status;
-
+	private String purchaseState;
+	@Column(name="Quantity")
+	private long itemQuantity;
+	
+	@Column(name="Product_Description")
+	private String itemDescription;
+	
 	@Column(name = "expected_date")
 	private Date expectedDate;
-
+	
+	@Column(name="Unit_Price")
+	private double unitPrice;
+	@Column(name="Total")
+	private double total;
 	@ManyToMany(mappedBy = "purchaseOrder")
 	private Set<StoreStock> orderstock=new HashSet<StoreStock>();
-
+	
+	@OneToMany(targetEntity=OrderItem.class,mappedBy="purchases",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	private OrderItem odItem;
+	
 	public PurchaseOrder() {
 
 	}
-
-	public PurchaseOrder(Date purchaseDate, String status,
-			Date expectedDate) {
+	public PurchaseOrder(int purchaseId, Date purchaseDate, String purchaseState,
+			long itemQuantity, String itemDescription, Date expectedDate,
+			double unitPrice, double total) {
 		super();
-	
+		this.purchaseId = purchaseId;
 		this.purchaseDate = purchaseDate;
-		this.status = status;
+		this.purchaseState = purchaseState;
+		this.itemQuantity = itemQuantity;
+		this.itemDescription = itemDescription;
 		this.expectedDate = expectedDate;
-		
+		this.unitPrice = unitPrice;
+		this.total = total;
+	}
+	public double getUnitPrice() {
+		return unitPrice;
 	}
 
+	public void setUnitPrice(double unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+
+
+
+	public double getTotal() {
+		return total;
+	}
+
+
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+
+
+	public long getItemQuantity() {
+		return itemQuantity;
+	}
+	public void setItemQuantity(long itemQuantity) {
+		this.itemQuantity = itemQuantity;
+	}
+
+	public String getItemDescription() {
+		return itemDescription;
+	}
+
+	public void setItemDescription(String itemDescription) {
+		this.itemDescription = itemDescription;
+	}
+
+	public OrderItem getOdItem() {
+		return odItem;
+	}
+
+	public void setOdItem(OrderItem odItem) {
+		this.odItem = odItem;
+	}
+
+	@ManyToOne()
+	@JoinColumn(name="deliveryId")
+	private Delivery delivery;
+	
+	public Delivery getDelivery() {
+		return delivery;
+	}
+
+	public void setDelivery(Delivery delivery) {
+		this.delivery = delivery;
+	}
+
+	@ManyToOne()
+	@JoinColumn(name="invoiceId")
+	private Invoice invoice;
+	
+	public Invoice getInvoice() {
+		return invoice;
+	}
+
+	public void setInvoice(Invoice invoice) {
+		this.invoice = invoice;
+	}
+
+	
 	public int getPurchaseId() {
 		return purchaseId;
 	}
@@ -74,11 +163,11 @@ public class PurchaseOrder implements Serializable {
 	}
 
 	public String getStatus() {
-		return status;
+		return purchaseState;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setPurchaseState(String purchaseState) {
+		this.purchaseState = purchaseState;
 	}
 
 	public Date getExpectedDate() {
